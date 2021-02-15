@@ -6,4 +6,6 @@
     <string name="cancel">Cancelar</string>
     <string name="title_save_stock">Cadastre uma empresa, Reit ou Fiis!</string>
     <string name="button_save_stock">Salvar</string>
+    <string name="ticker">ticker</string>
+    <string name="weight">peso</string>
 </resources>
