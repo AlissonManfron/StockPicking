@@ -1,4 +1,4 @@
-package br.com.alisson.stockpicking.ui.home
+package br.com.alisson.stockpicking.ui.portfolio
 
 import androidx.lifecycle.*
 import br.com.alisson.stockpicking.data.model.Stock
@@ -6,7 +6,7 @@ import br.com.alisson.stockpicking.data.repository.StockRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val stockRepository: StockRepository) : ViewModel() {
+class PortfolioViewModel(private val stockRepository: StockRepository) : ViewModel() {
 
     private val stocks = MutableLiveData<List<Stock>>()
     private val updated = MutableLiveData<Boolean>()
@@ -42,10 +42,10 @@ class HomeViewModel(private val stockRepository: StockRepository) : ViewModel() 
     }
 
 
-    class HomeViewModelFactory(private val stockRepository: StockRepository) :
+    class PortfolioViewModelFactory(private val stockRepository: StockRepository) :
             ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return HomeViewModel(stockRepository) as T
+            return PortfolioViewModel(stockRepository) as T
         }
     }
 

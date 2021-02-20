@@ -1,13 +1,9 @@
-package br.com.alisson.stockpicking.ui.home
+package br.com.alisson.stockpicking.ui.portfolio
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
-import android.view.View.GONE
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -15,30 +11,30 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alisson.stockpicking.MainActivity
 import br.com.alisson.stockpicking.R
+import br.com.alisson.stockpicking.data.adapter.StockListAdapter
 import br.com.alisson.stockpicking.data.db.AppDatabase
-import br.com.alisson.stockpicking.data.db.toStockList
 import br.com.alisson.stockpicking.data.model.Stock
 import br.com.alisson.stockpicking.data.repository.StockDbDataSource
 import br.com.alisson.stockpicking.infrastructure.DialogUtils
-import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_portfolio.*
 
 
 interface StockOnclickListener {
     fun onclickListener(stock: Stock)
 }
 
-class HomeFragment : Fragment(), MainActivity.OnButtonClickListener {
+class PortfolioFragment : Fragment(), MainActivity.OnButtonClickListener {
     private lateinit var adapter: StockListAdapter
 
-    val itemOnClick: (stock: Stock) -> Unit = { stock ->
-        homeViewModel.deleteStock(stock)
+    private val itemOnClick: (stock: Stock) -> Unit = { stock ->
+        viewModel.deleteStock(stock)
     }
 
-    private val homeViewModel: HomeViewModel by activityViewModels(
+    private val viewModel: PortfolioViewModel by activityViewModels(
         factoryProducer = {
             val dataBase = AppDatabase.getDatabase(requireContext())
 
-            HomeViewModel.HomeViewModelFactory(
+            PortfolioViewModel.PortfolioViewModelFactory(
                 stockRepository = StockDbDataSource(dataBase.stockDao())
             )
         }
@@ -49,23 +45,23 @@ class HomeFragment : Fragment(), MainActivity.OnButtonClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
+        val root = inflater.inflate(R.layout.fragment_portfolio, container, false)
 
-        (activity as MainActivity?)?.setOnButtonClickListener(this@HomeFragment)
+        (activity as MainActivity?)?.setOnButtonClickListener(this@PortfolioFragment)
 
         setupRecyclerView(root)
 
-        homeViewModel.getStocks().observe(viewLifecycleOwner, Observer {
+        viewModel.getStocks().observe(viewLifecycleOwner, Observer {
             it.let {
                 adapter.setStocks(it)
             }
         })
 
-        homeViewModel.getUpdate().observe(viewLifecycleOwner, Observer {
-            homeViewModel.getAllStocks()
+        viewModel.getUpdate().observe(viewLifecycleOwner, Observer {
+            viewModel.getAllStocks()
         })
 
-        homeViewModel.getAllStocks()
+        viewModel.getAllStocks()
 
         return root
     }
@@ -81,7 +77,7 @@ class HomeFragment : Fragment(), MainActivity.OnButtonClickListener {
     private fun showPopup() {
         DialogUtils.showPopupAddSctock(requireActivity(), object : StockOnclickListener {
             override fun onclickListener(stock: Stock) {
-                homeViewModel.createStock(stock)
+                viewModel.createStock(stock)
             }
         })
     }

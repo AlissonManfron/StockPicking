@@ -4,7 +4,7 @@ import android.app.Activity
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import br.com.alisson.stockpicking.R
-import br.com.alisson.stockpicking.ui.home.StockOnclickListener
+import br.com.alisson.stockpicking.ui.portfolio.StockOnclickListener
 import br.com.alisson.stockpicking.data.model.Stock
 
 class DialogUtils {

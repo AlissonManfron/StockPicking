@@ -1,4 +1,4 @@
-package br.com.alisson.stockpicking.ui.home
+package br.com.alisson.stockpicking.data.adapter
 
 import android.content.Context
 import android.view.LayoutInflater

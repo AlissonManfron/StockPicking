@@ -1,11 +1,14 @@
 <resources>
     <string name="app_name">Stock Picking</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_dashboard">Resumo</string>
+    <string name="title_home">Pertifólio</string>
+    <string name="title_notifications">Alertas</string>
+    <string name="title_account">Conta</string>
     <string name="cancel">Cancelar</string>
     <string name="title_save_stock">Cadastre uma empresa, Reit ou Fiis!</string>
     <string name="button_save_stock">Salvar</string>
     <string name="ticker">ticker</string>
     <string name="weight">peso</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

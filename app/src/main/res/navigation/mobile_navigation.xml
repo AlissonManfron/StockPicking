@@ -6,20 +6,27 @@
     app:startDestination="@+id/navigation_home">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="br.com.alisson.stockpicking.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
-
-    <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="br.com.alisson.stockpicking.ui.dashboard.DashboardFragment"
+        android:name="br.com.alisson.stockpicking.ui.resume.ResumeFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_resume" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="br.com.alisson.stockpicking.ui.notifications.NotificationsFragment"
+        android:id="@+id/navigation_home"
+        android:name="br.com.alisson.stockpicking.ui.portfolio.PortfolioFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_portfolio" />
+
+    <fragment
+        android:id="@+id/navigation_alert"
+        android:name="br.com.alisson.stockpicking.ui.alert.AlertFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_account" />
+
+
+    <fragment
+        android:id="@+id/navigation_account"
+        android:name="br.com.alisson.stockpicking.ui.account.AccountFragment"
+        android:label="@string/title_account"
+        tools:layout="@layout/fragment_account" />
 </navigation>

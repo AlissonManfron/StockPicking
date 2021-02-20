@@ -1,4 +1,4 @@
-package br.com.alisson.stockpicking.ui.dashboard
+package br.com.alisson.stockpicking.ui.resume
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import br.com.alisson.stockpicking.R
 
-class DashboardFragment : Fragment() {
+class ResumeFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+    private lateinit var viewModel: ResumeViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
+        viewModel =
+                ViewModelProviders.of(this).get(ResumeViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_resume, container, false)
         val textView: TextView = root.findViewById(R.id.text_dashboard)
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
+        viewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
