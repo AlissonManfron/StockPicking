@@ -28,7 +28,7 @@ class DialogUtils {
                     ) { p0, p1 ->
                         val ticker = editTicker.text.toString()
                         val weight = editWeight.text.toString().toInt()
-                        callback.onclickListener(Stock(ticker, weight))
+                        callback.onclickListener(Stock(null, ticker, weight))
                     }
                 builder.create()
                 builder.show()
