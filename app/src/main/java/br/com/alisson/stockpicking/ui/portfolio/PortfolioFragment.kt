@@ -15,13 +15,9 @@ import br.com.alisson.stockpicking.data.adapter.StockListAdapter
 import br.com.alisson.stockpicking.data.db.AppDatabase
 import br.com.alisson.stockpicking.data.model.Stock
 import br.com.alisson.stockpicking.data.repository.StockDbDataSource
-import br.com.alisson.stockpicking.infrastructure.DialogUtils
+import br.com.alisson.stockpicking.infrastructure.`interface`.StockOnclickListener
+import br.com.alisson.stockpicking.infrastructure.util.DialogUtils
 import kotlinx.android.synthetic.main.fragment_portfolio.*
-
-
-interface StockOnclickListener {
-    fun onclickListener(stock: Stock)
-}
 
 class PortfolioFragment : Fragment(), MainActivity.OnButtonClickListener {
     private lateinit var adapter: StockListAdapter

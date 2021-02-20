@@ -1,4 +1,4 @@
-package br.com.alisson.stockpicking.infrastructure
+package br.com.alisson.stockpicking.infrastructure.util
 
 import android.app.Activity
 import android.widget.EditText
