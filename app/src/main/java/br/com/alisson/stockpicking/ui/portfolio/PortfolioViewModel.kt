@@ -3,19 +3,20 @@ package br.com.alisson.stockpicking.ui.portfolio
 import androidx.lifecycle.*
 import br.com.alisson.stockpicking.data.model.Stock
 import br.com.alisson.stockpicking.data.repository.StockRepository
+import br.com.alisson.stockpicking.infrastructure.util.StateUpdate
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class PortfolioViewModel(private val stockRepository: StockRepository) : ViewModel() {
 
     private val stocks = MutableLiveData<List<Stock>>()
-    private val updated = MutableLiveData<Boolean>()
+    private val updated = MutableLiveData<StateUpdate>()
 
     fun getStocks() : LiveData<List<Stock>> {
         return stocks
     }
 
-    fun getUpdate() : LiveData<Boolean> {
+    fun getUpdate() : LiveData<StateUpdate> {
         return updated
     }
 
@@ -23,7 +24,7 @@ class PortfolioViewModel(private val stockRepository: StockRepository) : ViewMod
         viewModelScope.launch {
             stockRepository.createStock(stock)
             delay(300)
-            updated.value = true
+            callUpdated()
         }
     }
 
@@ -31,7 +32,7 @@ class PortfolioViewModel(private val stockRepository: StockRepository) : ViewMod
         viewModelScope.launch {
             stockRepository.deleteStock(stock)
             delay(300)
-            updated.value = true
+            callUpdated()
         }
     }
 
@@ -39,6 +40,11 @@ class PortfolioViewModel(private val stockRepository: StockRepository) : ViewMod
         viewModelScope.launch {
             stocks.value = stockRepository.getStocks()
         }
+    }
+
+    private fun callUpdated() {
+        updated.value = StateUpdate.UPDATED
+        updated.value = StateUpdate.UNKNOW
     }
 
 

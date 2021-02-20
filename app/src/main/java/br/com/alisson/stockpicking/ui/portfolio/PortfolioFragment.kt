@@ -17,6 +17,7 @@ import br.com.alisson.stockpicking.data.model.Stock
 import br.com.alisson.stockpicking.data.repository.StockDbDataSource
 import br.com.alisson.stockpicking.infrastructure.`interface`.StockOnclickListener
 import br.com.alisson.stockpicking.infrastructure.util.DialogUtils
+import br.com.alisson.stockpicking.infrastructure.util.StateUpdate
 import kotlinx.android.synthetic.main.fragment_portfolio.*
 
 class PortfolioFragment : Fragment(), MainActivity.OnButtonClickListener {
@@ -54,7 +55,8 @@ class PortfolioFragment : Fragment(), MainActivity.OnButtonClickListener {
         })
 
         viewModel.getUpdate().observe(viewLifecycleOwner, Observer {
-            viewModel.getAllStocks()
+            if (it == StateUpdate.UPDATED)
+                viewModel.getAllStocks()
         })
 
         viewModel.getAllStocks()
