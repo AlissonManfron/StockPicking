@@ -1,7 +1,6 @@
 package br.com.alisson.stockpicking
 
 import android.os.Bundle
-import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -16,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     private var onclickListener: OnButtonClickListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        getSupportActionBar()?.hide();
+        getSupportActionBar()?.hide()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.bottom_navigation_main)
@@ -25,8 +24,8 @@ class MainActivity : AppCompatActivity() {
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_dashboard,
-                R.id.navigation_home,
+                R.id.navigation_resume,
+                R.id.navigation_portfolio,
                 R.id.navigation_alert,
                 R.id.navigation_account
             )

@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_resume">
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_resume"
         android:name="br.com.alisson.stockpicking.ui.resume.ResumeFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_resume" />
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_portfolio"
         android:name="br.com.alisson.stockpicking.ui.portfolio.PortfolioFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_portfolio" />
