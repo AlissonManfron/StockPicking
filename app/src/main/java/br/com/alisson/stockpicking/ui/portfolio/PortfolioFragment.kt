@@ -9,19 +9,16 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import br.com.alisson.stockpicking.MainActivity
 import br.com.alisson.stockpicking.R
 import br.com.alisson.stockpicking.data.adapter.StockListAdapter
 import br.com.alisson.stockpicking.data.db.AppDatabase
 import br.com.alisson.stockpicking.data.model.Stock
 import br.com.alisson.stockpicking.data.repository.StockDbDataSource
-import br.com.alisson.stockpicking.infrastructure.`interface`.StockOnclickListener
-import br.com.alisson.stockpicking.infrastructure.util.DialogUtils
 import br.com.alisson.stockpicking.infrastructure.util.StateScreen
 import br.com.alisson.stockpicking.infrastructure.util.StateUpdate
 import kotlinx.android.synthetic.main.fragment_portfolio.*
 
-class PortfolioFragment : Fragment(), MainActivity.OnButtonClickListener {
+class PortfolioFragment : Fragment() {
     private lateinit var adapter: StockListAdapter
 
     private val itemOnClick: (stock: Stock) -> Unit = { stock ->
@@ -44,8 +41,6 @@ class PortfolioFragment : Fragment(), MainActivity.OnButtonClickListener {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_portfolio, container, false)
-
-        (activity as MainActivity?)?.setOnButtonClickListener(this@PortfolioFragment)
 
         setupRecyclerView(root)
 
@@ -86,17 +81,4 @@ class PortfolioFragment : Fragment(), MainActivity.OnButtonClickListener {
         adapter = StockListAdapter(emptyList(), requireContext(), itemOnClick)
         recyclerView.adapter = adapter
     }
-
-    private fun showPopup() {
-        DialogUtils.showPopupAddSctock(requireActivity(), object : StockOnclickListener {
-            override fun onclickListener(stock: Stock) {
-                viewModel.createStock(stock)
-            }
-        })
-    }
-
-    override fun onClick() {
-        showPopup()
-    }
-
 }

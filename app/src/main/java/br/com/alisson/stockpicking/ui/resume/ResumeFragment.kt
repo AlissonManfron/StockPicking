@@ -24,7 +24,6 @@ class ResumeFragment : Fragment() {
     private val viewModel: ResumeViewModel by activityViewModels(
         factoryProducer = {
             val dataBase = AppDatabase.getDatabase(requireContext())
-
             ResumeViewModel.ResumeViewModelFactory(
                 stockRepository = StockDbDataSource(dataBase.stockDao())
             )
