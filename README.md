@@ -16,7 +16,7 @@
 > 
 <br/>
 
-> ## Layout
+> ## Imagens
 > 
 > <p align="start">
 > <img src="https://user-images.githubusercontent.com/12566865/112736182-74c16b80-8f2f-11eb-8d5a-206796130757.jpeg" width="350" title="hover text">
