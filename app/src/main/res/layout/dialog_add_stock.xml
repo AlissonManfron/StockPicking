@@ -1,15 +1,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_stock">
 
-    <ImageView
-        android:src="@drawable/ic_home_black_24dp"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:scaleType="center"
-        android:background="@color/colorPrimary"
-        android:contentDescription="@string/app_name" />
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="20sp"
+        android:text="@string/text_title_dialog" />
 
     <EditText
         android:id="@+id/ticker"
@@ -36,4 +37,12 @@
         android:hint="@string/weight"
         android:importantForAutofill="no" />
 
+    <Button
+        android:id="@+id/save"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_rounded_button"
+        android:text="@string/save" />
 </LinearLayout>
