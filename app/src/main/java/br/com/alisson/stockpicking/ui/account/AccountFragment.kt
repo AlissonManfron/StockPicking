@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import br.com.alisson.stockpicking.R
 
@@ -19,8 +20,7 @@ class AccountFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        viewModel =
-                ViewModelProviders.of(this).get(AccountViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(AccountViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_account, container, false)
         val textView: TextView = root.findViewById(R.id.text_notifications)
         viewModel.text.observe(viewLifecycleOwner, Observer {
