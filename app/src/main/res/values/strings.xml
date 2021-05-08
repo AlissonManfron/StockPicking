@@ -11,4 +11,7 @@
     <string name="weight">peso</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_title_dialog">Dgite as informações abaixo:</string>
+    <string name="save">Salvar</string>
+    <string name="text_empty_mensages">Você ainda não possui mensagens :(</string>
 </resources>
