@@ -8,13 +8,13 @@
     <fragment
         android:id="@+id/navigation_resume"
         android:name="br.com.alisson.stockpicking.ui.resume.ResumeFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_resume"
         tools:layout="@layout/fragment_resume" />
 
     <fragment
         android:id="@+id/navigation_portfolio"
         android:name="br.com.alisson.stockpicking.ui.portfolio.PortfolioFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_portfolio"
         tools:layout="@layout/fragment_portfolio" />
 
     <fragment

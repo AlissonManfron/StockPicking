@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Stock Picking</string>
-    <string name="title_dashboard">Resumo</string>
-    <string name="title_home">Pertifólio</string>
+    <string name="title_resume">Resumo</string>
+    <string name="title_portfolio">Pertifólio</string>
     <string name="title_notifications">Alertas</string>
     <string name="title_account">Conta</string>
     <string name="cancel">Cancelar</string>

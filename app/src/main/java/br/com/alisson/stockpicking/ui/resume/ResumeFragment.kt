@@ -62,7 +62,7 @@ class ResumeFragment : Fragment() {
             binding.pieChartView.description.isEnabled = false
             binding.pieChartView.centerText = "Seu Portifólio"
             binding.pieChartView.setExtraOffsets(5F, 10F, 5F, 15F)
-            binding.pieChartView.setCenterTextSize(16F)
+            binding.pieChartView.setCenterTextSize(15F)
             binding.pieChartView.centerTextRadiusPercent = 50F
             binding.pieChartView.animateY(1400, Easing.EaseInOutQuad)
 
@@ -70,7 +70,7 @@ class ResumeFragment : Fragment() {
         })
 
         viewModel.getAllStocks()
-        
+
         return view
     }
 

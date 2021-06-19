@@ -6,7 +6,6 @@ import br.com.alisson.stockpicking.data.repository.StockRepository
 import com.github.mikephil.charting.data.PieEntry
 import kotlinx.coroutines.launch
 
-
 class ResumeViewModel(private val stockRepository: StockRepository) : ViewModel() {
 
     private val pieEntryList = MutableLiveData<List<PieEntry>>()
