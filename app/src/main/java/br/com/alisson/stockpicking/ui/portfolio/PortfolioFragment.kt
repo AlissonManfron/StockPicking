@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alisson.stockpicking.R
@@ -14,12 +13,16 @@ import br.com.alisson.stockpicking.data.adapter.StockListAdapter
 import br.com.alisson.stockpicking.data.db.AppDatabase
 import br.com.alisson.stockpicking.data.model.Stock
 import br.com.alisson.stockpicking.data.repository.StockDbDataSource
+import br.com.alisson.stockpicking.databinding.FragmentPortfolioBinding
 import br.com.alisson.stockpicking.infrastructure.util.StateScreen
 import br.com.alisson.stockpicking.infrastructure.util.StateUpdate
-import kotlinx.android.synthetic.main.fragment_portfolio.*
 
 class PortfolioFragment : Fragment() {
     private lateinit var adapter: StockListAdapter
+    private var _binding: FragmentPortfolioBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
     private val itemOnClick: (stock: Stock) -> Unit = { stock ->
         viewModel.deleteStock(stock)
@@ -39,46 +42,51 @@ class PortfolioFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val root = inflater.inflate(R.layout.fragment_portfolio, container, false)
+    ): View {
+        _binding = FragmentPortfolioBinding.inflate(inflater, container, false)
+        val view = binding.root
+        setupRecyclerView(view)
 
-        setupRecyclerView(root)
-
-        viewModel.getStocks().observe(viewLifecycleOwner, Observer {
+        viewModel.getStocks().observe(viewLifecycleOwner, {
             it.let {
                 adapter.setStocks(it)
             }
         })
 
-        viewModel.getUpdate().observe(viewLifecycleOwner, Observer {
+        viewModel.getUpdate().observe(viewLifecycleOwner, {
             if (it == StateUpdate.UPDATED)
                 viewModel.getAllStocks()
         })
 
-        viewModel.getScreenWithItem().observe(viewLifecycleOwner, Observer {
+        viewModel.getScreenWithItem().observe(viewLifecycleOwner, {
             if (it == StateScreen.WITH_ITEM) {
-                cl_empty_list.visibility = View.GONE
-                recycler.visibility = View.VISIBLE
+                binding.clEmptyList.visibility = View.GONE
+                binding.recycler.visibility = View.VISIBLE
             }
         })
 
-        viewModel.getScreenEmpty().observe(viewLifecycleOwner, Observer {
+        viewModel.getScreenEmpty().observe(viewLifecycleOwner, {
             if (it == StateScreen.EMPTY) {
-                cl_empty_list.visibility = View.VISIBLE
-                recycler.visibility = View.GONE
+                binding.clEmptyList.visibility = View.VISIBLE
+                binding.recycler.visibility = View.GONE
             }
         })
 
         viewModel.getAllStocks()
 
-        return root
+        return view
     }
 
     private fun setupRecyclerView(root: View) {
         val recyclerView = root.findViewById<RecyclerView>(R.id.recycler)
         val layoutManager = LinearLayoutManager(requireContext())
         recyclerView.layoutManager = layoutManager
-        adapter = StockListAdapter(emptyList(), requireContext(), itemOnClick)
+        adapter = StockListAdapter(emptyList(), itemOnClick)
         recyclerView.adapter = adapter
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

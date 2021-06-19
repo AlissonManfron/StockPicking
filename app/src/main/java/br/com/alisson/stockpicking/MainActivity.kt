@@ -11,16 +11,16 @@ import androidx.navigation.ui.setupWithNavController
 import br.com.alisson.stockpicking.data.db.AppDatabase
 import br.com.alisson.stockpicking.data.model.Stock
 import br.com.alisson.stockpicking.data.repository.StockDbDataSource
+import br.com.alisson.stockpicking.databinding.ActivityMainBinding
 import br.com.alisson.stockpicking.infrastructure.`interface`.StockOnclickListener
 import br.com.alisson.stockpicking.infrastructure.util.DialogUtils
 import br.com.alisson.stockpicking.ui.portfolio.PortfolioViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_main.*
-
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
+    private lateinit var binding: ActivityMainBinding
 
     private val viewModel: PortfolioViewModel by viewModels(
         factoryProducer = {
@@ -32,9 +32,11 @@ class MainActivity : AppCompatActivity() {
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        getSupportActionBar()?.hide()
+        supportActionBar?.hide()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
         val navView: BottomNavigationView = findViewById(R.id.bottom_navigation_main)
 
         navController = findNavController(R.id.nav_host_fragment)
@@ -50,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        fab_add.setOnClickListener {
+        binding.fabAdd.setOnClickListener {
             showPopup()
         }
     }

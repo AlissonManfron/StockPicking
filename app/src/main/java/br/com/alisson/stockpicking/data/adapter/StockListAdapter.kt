@@ -1,26 +1,22 @@
 package br.com.alisson.stockpicking.data.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import br.com.alisson.stockpicking.R
 import br.com.alisson.stockpicking.data.model.Stock
-import kotlinx.android.synthetic.main.stock_item.view.*
+import br.com.alisson.stockpicking.databinding.StockItemBinding
 
 class StockListAdapter(private var stocks: List<Stock>,
-                       private val context: Context,
                        private val itemClickListener: (Stock) -> Unit
 ) : RecyclerView.Adapter<StockListAdapter.ViewHolder>() {
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnLongClickListener {
+    class ViewHolder(private val item: StockItemBinding) : RecyclerView.ViewHolder(item.root), View.OnLongClickListener {
 
         private var itemLongClickListener: ItemLongClickListener? = null
 
         fun bindView(stock: Stock) {
-            val title = itemView.stock_item_title
-            title.text = stock.ticker
+            item.stockItemTitle.text = stock.ticker
             itemView.setOnLongClickListener(this)
         }
 
@@ -36,8 +32,8 @@ class StockListAdapter(private var stocks: List<Stock>,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.stock_item, parent, false)
-        return ViewHolder(view)
+        val itemBinding = StockItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(itemBinding)
     }
 
     override fun getItemCount(): Int {
