@@ -8,11 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import br.com.alisson.stockpicking.R
 import br.com.alisson.stockpicking.data.db.AppDatabase
 import br.com.alisson.stockpicking.data.repository.StockDbDataSource
+import br.com.alisson.stockpicking.databinding.FragmentResumeBinding
 import com.github.mikephil.charting.animation.Easing
-import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.formatter.PercentFormatter
@@ -20,6 +19,10 @@ import com.github.mikephil.charting.utils.MPPointF
 
 
 class ResumeFragment : Fragment() {
+
+    private var _binding: FragmentResumeBinding? = null
+    private val binding get() = _binding!!
+
 
     private val viewModel: ResumeViewModel by activityViewModels(
         factoryProducer = {
@@ -34,13 +37,11 @@ class ResumeFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        _binding = FragmentResumeBinding.inflate(inflater, container, false)
+        val view = binding.root
 
-        val root = inflater.inflate(R.layout.fragment_resume, container, false)
-
-        val pieChartView = root.findViewById<PieChart>(R.id.pieChartView)
-
-        viewModel.getEntryList().observe(viewLifecycleOwner, Observer { pieList ->
+        viewModel.getEntryList().observe(viewLifecycleOwner, { pieList ->
 
             val pieDataSet = PieDataSet(pieList, "")
             pieDataSet.setDrawIcons(false)
@@ -54,24 +55,27 @@ class ResumeFragment : Fragment() {
             pieData.setValueTextSize(11f)
             pieData.setValueTextColor(Color.WHITE)
 
-            pieChartView.data = pieData
+            binding.pieChartView.data = pieData
 
-            pieChartView.setDrawEntryLabels(true)
-            pieChartView.setUsePercentValues(true)
-            pieChartView.description.isEnabled = false
-            pieChartView.centerText = "Seu Portifólio"
-            pieChartView.setExtraOffsets(5F, 10F, 5F, 15F)
-            pieChartView.setCenterTextSize(16F)
-            pieChartView.centerTextRadiusPercent = 50F
-            pieChartView.animateY(1400, Easing.EaseInOutQuad)
+            binding.pieChartView.setDrawEntryLabels(true)
+            binding.pieChartView.setUsePercentValues(true)
+            binding.pieChartView.description.isEnabled = false
+            binding.pieChartView.centerText = "Seu Portifólio"
+            binding.pieChartView.setExtraOffsets(5F, 10F, 5F, 15F)
+            binding.pieChartView.setCenterTextSize(16F)
+            binding.pieChartView.centerTextRadiusPercent = 50F
+            binding.pieChartView.animateY(1400, Easing.EaseInOutQuad)
 
-            pieChartView.invalidate()
+            binding.pieChartView.invalidate()
         })
 
         viewModel.getAllStocks()
-
-
-        return root
+        
+        return view
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

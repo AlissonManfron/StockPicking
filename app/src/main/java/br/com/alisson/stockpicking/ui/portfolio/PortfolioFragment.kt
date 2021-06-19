@@ -20,8 +20,6 @@ import br.com.alisson.stockpicking.infrastructure.util.StateUpdate
 class PortfolioFragment : Fragment() {
     private lateinit var adapter: StockListAdapter
     private var _binding: FragmentPortfolioBinding? = null
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     private val itemOnClick: (stock: Stock) -> Unit = { stock ->
