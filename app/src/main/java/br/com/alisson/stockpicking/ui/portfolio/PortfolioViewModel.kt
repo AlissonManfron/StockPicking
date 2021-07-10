@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import br.com.alisson.stockpicking.data.model.ResourceStock
+import br.com.alisson.stockpicking.data.model.ResourceList
 import br.com.alisson.stockpicking.data.model.Stock
 import br.com.alisson.stockpicking.data.repository.StockRepository
 import br.com.alisson.stockpicking.infrastructure.util.StateScreen
@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class PortfolioViewModel(private val stockRepository: StockRepository) : ViewModel() {
 
-    private val stocks = MutableLiveData<ResourceStock<List<Stock>?>>()
+    private val stocks = MutableLiveData<ResourceList<List<Stock>?>>()
 
     fun getStocks() = stocks
 
@@ -38,9 +38,9 @@ class PortfolioViewModel(private val stockRepository: StockRepository) : ViewMod
         viewModelScope.launch {
             val list = stockRepository.getStocks()
             if (list.isEmpty()) {
-                stocks.value = ResourceStock(null, StateScreen.EMPTY.name)
+                stocks.value = ResourceList(null, StateScreen.EMPTY.name)
             } else {
-                stocks.value = ResourceStock(list)
+                stocks.value = ResourceList(list)
             }
         }
     }

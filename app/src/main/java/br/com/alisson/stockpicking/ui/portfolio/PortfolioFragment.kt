@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import br.com.alisson.stockpicking.R
 import br.com.alisson.stockpicking.data.adapter.StockListAdapter
 import br.com.alisson.stockpicking.data.db.AppDatabase
 import br.com.alisson.stockpicking.data.model.Stock
@@ -41,7 +43,7 @@ class PortfolioFragment : Fragment() {
         setupRecyclerView()
 
         viewModel.getStocks().observe(viewLifecycleOwner, {
-            it.stocks?.let { stocks ->
+            it.valuedList?.let { stocks ->
                 adapter.setStocks(stocks)
                 showListStocks(true)
             }
@@ -54,7 +56,15 @@ class PortfolioFragment : Fragment() {
     }
 
     private fun showListStocks(show: Boolean) {
-        binding.clEmptyList.visibility = if (!show) View.VISIBLE else View.GONE
+        activity?.let {
+            binding.emptyView.imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_format_list_bulleted_24
+                )
+            )
+        }
+        binding.emptyView.clEmptyList.visibility = if (!show) View.VISIBLE else View.GONE
         binding.recycler.visibility = if (show) View.VISIBLE else View.GONE
     }
 

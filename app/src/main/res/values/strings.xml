@@ -14,4 +14,7 @@
     <string name="text_title_dialog">Dgite as informações abaixo:</string>
     <string name="save">Salvar</string>
     <string name="text_empty_mensages">Você ainda não possui mensagens :(</string>
+    <string name="empty_text_title">Você não tem nenhum ativo cadastrado</string>
+    <string name="empty_text_description">Clique no botão +abaixo para começar.</string>
+    <string name="empty_text_content_description">ícone de menu</string>
 </resources>

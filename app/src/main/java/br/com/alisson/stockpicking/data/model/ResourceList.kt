@@ -1,6 +1,6 @@
 package br.com.alisson.stockpicking.data.model
 
-class ResourceStock<T>(
-    val stocks: T?,
+class ResourceList<T>(
+    val valuedList: T?,
     val emptyList: String? = null
 )
