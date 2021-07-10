@@ -7,15 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import br.com.alisson.stockpicking.R
 import br.com.alisson.stockpicking.data.adapter.StockListAdapter
 import br.com.alisson.stockpicking.data.db.AppDatabase
 import br.com.alisson.stockpicking.data.model.Stock
 import br.com.alisson.stockpicking.data.repository.StockDbDataSource
 import br.com.alisson.stockpicking.databinding.FragmentPortfolioBinding
-import br.com.alisson.stockpicking.infrastructure.util.StateScreen
-import br.com.alisson.stockpicking.infrastructure.util.StateUpdate
 
 class PortfolioFragment : Fragment() {
     private lateinit var adapter: StockListAdapter
@@ -29,7 +25,6 @@ class PortfolioFragment : Fragment() {
     private val viewModel: PortfolioViewModel by activityViewModels(
         factoryProducer = {
             val dataBase = AppDatabase.getDatabase(requireContext())
-
             PortfolioViewModel.PortfolioViewModelFactory(
                 stockRepository = StockDbDataSource(dataBase.stockDao())
             )
@@ -43,44 +38,31 @@ class PortfolioFragment : Fragment() {
     ): View {
         _binding = FragmentPortfolioBinding.inflate(inflater, container, false)
         val view = binding.root
-        setupRecyclerView(view)
+        setupRecyclerView()
 
         viewModel.getStocks().observe(viewLifecycleOwner, {
-            it.let {
-                adapter.setStocks(it)
+            it.stocks?.let { stocks ->
+                adapter.setStocks(stocks)
+                showListStocks(true)
+            }
+            it.emptyList?.let {
+                showListStocks(false)
             }
         })
-
-        viewModel.getUpdate().observe(viewLifecycleOwner, {
-            if (it == StateUpdate.UPDATED)
-                viewModel.getAllStocks()
-        })
-
-        viewModel.getScreenWithItem().observe(viewLifecycleOwner, {
-            if (it == StateScreen.WITH_ITEM) {
-                binding.clEmptyList.visibility = View.GONE
-                binding.recycler.visibility = View.VISIBLE
-            }
-        })
-
-        viewModel.getScreenEmpty().observe(viewLifecycleOwner, {
-            if (it == StateScreen.EMPTY) {
-                binding.clEmptyList.visibility = View.VISIBLE
-                binding.recycler.visibility = View.GONE
-            }
-        })
-
-        viewModel.getAllStocks()
 
         return view
     }
 
-    private fun setupRecyclerView(root: View) {
-        val recyclerView = root.findViewById<RecyclerView>(R.id.recycler)
+    private fun showListStocks(show: Boolean) {
+        binding.clEmptyList.visibility = if (!show) View.VISIBLE else View.GONE
+        binding.recycler.visibility = if (show) View.VISIBLE else View.GONE
+    }
+
+    private fun setupRecyclerView() {
         val layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.layoutManager = layoutManager
+        binding.recycler.layoutManager = layoutManager
         adapter = StockListAdapter(emptyList(), itemOnClick)
-        recyclerView.adapter = adapter
+        binding.recycler.adapter = adapter
     }
 
     override fun onDestroyView() {
