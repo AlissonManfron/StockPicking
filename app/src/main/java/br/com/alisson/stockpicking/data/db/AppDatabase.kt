@@ -1,12 +1,11 @@
 package br.com.alisson.stockpicking.data.db
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
 import br.com.alisson.stockpicking.data.db.dao.StockDao
 
 @Database(entities = [StockEntity::class], version = 1, exportSchema = false)
+@TypeConverters(DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun stockDao(): StockDao

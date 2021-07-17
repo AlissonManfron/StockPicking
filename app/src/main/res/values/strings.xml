@@ -7,7 +7,7 @@
     <string name="cancel">Cancelar</string>
     <string name="title_save_stock">Cadastre uma empresa, Reit ou Fiis!</string>
     <string name="button_save_stock">Salvar</string>
-    <string name="ticker">ticker</string>
+    <string name="ticker">ticker(ex: ITSA4)</string>
     <string name="weight">peso</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -17,4 +17,17 @@
     <string name="empty_text_title">Você não tem nenhum ativo cadastrado</string>
     <string name="empty_text_description">Clique no botão +abaixo para começar.</string>
     <string name="empty_text_content_description">ícone de menu</string>
+    <string name="quantity">quantidade</string>
+    <string name="price">cotação</string>
+    <string name="date">data(Ex: 10/01/2021</string>
+    <string name="title_register">Cadastro de Ativo</string>
+
+    <string name="msg_empty_fields">"Preencha todos os campos!"</string>
+
+    <string name="msg_empty_field_ticker">"Preencha o campo ticker!"</string>
+    <string name="msg_empty_field_quantity">"Preencha o campo quantidade!"</string>
+    <string name="msg_empty_field_price">"Preencha o campo cotação!"</string>
+    <string name="msg_empty_field_date">"Preencha o campo data!"</string>
+    <string name="msg_empty_field_weight">"Deslize a barra para escolher um peso!"</string>
+
 </resources>

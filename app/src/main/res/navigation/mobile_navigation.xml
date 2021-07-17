@@ -18,6 +18,12 @@
         tools:layout="@layout/fragment_portfolio" />
 
     <fragment
+        android:id="@+id/navigation_register"
+        android:name="br.com.alisson.stockpicking.ui.register.RegisterStockFragment"
+        android:label="@string/title_register"
+        tools:layout="@layout/register_stock_fragment" />
+
+    <fragment
         android:id="@+id/navigation_alert"
         android:name="br.com.alisson.stockpicking.ui.alert.AlertFragment"
         android:label="@string/title_notifications"
