@@ -6,6 +6,10 @@
 > 
 <br/>
 
+> ## Status
+> Em desenvolvimento
+<br/>
+
 > ## Tecnologias
 >
 > - linguagem: Kotlin
