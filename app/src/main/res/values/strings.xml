@@ -29,5 +29,11 @@
     <string name="msg_empty_field_price">"Preencha o campo cotação!"</string>
     <string name="msg_empty_field_date">"Preencha o campo data!"</string>
     <string name="msg_empty_field_weight">"Deslize a barra para escolher um peso!"</string>
+    <string name="zero">0</string>
+    <string name="two">2</string>
+    <string name="seven">7</string>
+    <string name="five">5</string>
+    <string name="ten">10</string>
+    <string name="seekbar_title">Defina um peso de 0 à 10</string>
 
 </resources>

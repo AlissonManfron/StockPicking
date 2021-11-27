@@ -52,6 +52,8 @@ class PortfolioFragment : Fragment() {
             }
         })
 
+        viewModel.getAllStocks()
+
         return view
     }
 

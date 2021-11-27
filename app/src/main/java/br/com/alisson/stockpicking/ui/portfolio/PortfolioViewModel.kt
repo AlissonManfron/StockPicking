@@ -16,10 +16,6 @@ class PortfolioViewModel(private val stockRepository: StockRepository) : ViewMod
 
     fun getStocks() = stocks
 
-    init {
-        getAllStocks()
-    }
-
     fun createStock(stock: Stock) {
         viewModelScope.launch {
             stockRepository.createStock(stock)
