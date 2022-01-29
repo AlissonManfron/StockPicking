@@ -42,7 +42,7 @@ class ResumeFragment : Fragment() {
         _binding = FragmentResumeBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        viewModel.getEntryList().observe(viewLifecycleOwner, {
+        viewModel.getEntryList().observe(viewLifecycleOwner) {
 
             it.valuedList?.let { pieList ->
                 showPieChart(true)
@@ -52,7 +52,7 @@ class ResumeFragment : Fragment() {
                 showPieChart(false)
             }
 
-        })
+        }
 
         viewModel.getAllStocks()
 
