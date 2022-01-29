@@ -11,6 +11,7 @@ import br.com.alisson.stockpicking.data.model.Stock
 import br.com.alisson.stockpicking.data.repository.StockRepository
 import br.com.alisson.stockpicking.infrastructure.extensions.NumberExtensions.Companion.toWeight
 import br.com.alisson.stockpicking.infrastructure.extensions.StringExtensions.Companion.toDate
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class RegisterStockViewModel(private val repository: StockRepository) : ViewModel() {
@@ -38,12 +39,12 @@ class RegisterStockViewModel(private val repository: StockRepository) : ViewMode
             return
         }
 
-        if (quantity <= 0 ){
+        if (quantity <= 0) {
             stock.value = Resource(null, R.string.msg_empty_field_quantity)
             return
         }
 
-        if (price <= 0.0 ) {
+        if (price <= 0.0) {
             stock.value = Resource(null, R.string.msg_empty_field_price)
             return
         }
@@ -59,10 +60,38 @@ class RegisterStockViewModel(private val repository: StockRepository) : ViewMode
         }
 
         val stockBean = Stock(id = null, ticker, weight, quantity, price, date)
+
         viewModelScope.launch {
             repository.createStock(stockBean)
+            calculateWeight(stockBean)
         }
         stock.value = Resource(stockBean)
+    }
+
+    private suspend fun calculateWeight(stockBean: Stock): Unit {
+        var weight = 0.0
+        val currentStockBalance = stockBean.getTotalBalance()
+
+        val stocks = repository.getStocks()
+
+        if (stocks.isEmpty()) {
+            stockBean.weight = 100
+            return
+        }
+
+        var sum = 0.0// = stockBean.getTotalBalance()
+        stocks.forEach { stock ->
+            sum += stock.getTotalBalance()
+        }
+
+        stocks.forEach { stock ->
+            weight = (stock.getTotalBalance() / sum) * 100
+            stock.weight = weight.toInt()
+            repository.createStock(stock)
+        }
+
+
+        //stockBean.weight = weight.toInt()
     }
 
     fun clear() {
