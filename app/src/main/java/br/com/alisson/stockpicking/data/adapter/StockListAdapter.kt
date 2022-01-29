@@ -17,6 +17,9 @@ class StockListAdapter(private var stocks: List<Stock>,
 
         fun bindView(stock: Stock) {
             item.stockItemTitle.text = stock.ticker
+            item.stockItemCurrentBalance.text = stock.getCurrentBalance()
+            item.stockItemQtd.text = stock.quantity.toString()
+            item.stockItemPercentage.text = stock.getWeight()
             itemView.setOnLongClickListener(this)
         }
 
