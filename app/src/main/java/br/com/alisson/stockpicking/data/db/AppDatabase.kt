@@ -11,23 +11,12 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun stockDao(): StockDao
 
     companion object {
+        fun createDataBase(context: Context): StockDao {
+            return Room
+                .databaseBuilder(context, AppDatabase::class.java, "stocks.db")
+                .build()
+                .stockDao()
 
-        @Volatile
-        private var INSTANCE: AppDatabase? = null
-
-        fun getDatabase(context: Context): AppDatabase {
-            if (INSTANCE != null) return INSTANCE!!
-
-            synchronized(this) {
-
-                INSTANCE = Room
-                    .databaseBuilder(context, AppDatabase::class.java, "app_database")
-                    .fallbackToDestructiveMigration()
-                    .build()
-
-                return INSTANCE!!
-
-            }
         }
     }
 }

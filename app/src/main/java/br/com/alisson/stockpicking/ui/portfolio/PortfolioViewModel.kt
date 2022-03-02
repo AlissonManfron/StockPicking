@@ -2,7 +2,6 @@ package br.com.alisson.stockpicking.ui.portfolio
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import br.com.alisson.stockpicking.data.model.ResourceList
 import br.com.alisson.stockpicking.data.model.Stock
@@ -40,13 +39,4 @@ class PortfolioViewModel(private val stockRepository: StockRepository) : ViewMod
             }
         }
     }
-
-    class PortfolioViewModelFactory(private val stockRepository: StockRepository) :
-        ViewModelProvider.Factory {
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return PortfolioViewModel(stockRepository) as T
-        }
-    }
-
 }

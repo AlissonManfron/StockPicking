@@ -7,10 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import br.com.alisson.stockpicking.R
-import br.com.alisson.stockpicking.data.db.AppDatabase
-import br.com.alisson.stockpicking.data.repository.StockDbDataSource
 import br.com.alisson.stockpicking.databinding.FragmentResumeBinding
 import br.com.alisson.stockpicking.infrastructure.util.Util
 import com.github.mikephil.charting.animation.Easing
@@ -19,20 +16,13 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.MPPointF
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class ResumeFragment : Fragment() {
 
+    private val viewModel: ResumeViewModel by viewModel()
     private var _binding: FragmentResumeBinding? = null
     private val binding get() = _binding!!
-
-    private val viewModel: ResumeViewModel by activityViewModels(
-        factoryProducer = {
-            val dataBase = AppDatabase.getDatabase(requireContext())
-            ResumeViewModel.ResumeViewModelFactory(
-                stockRepository = StockDbDataSource(dataBase.stockDao())
-            )
-        }
-    )
 
     override fun onCreateView(
         inflater: LayoutInflater,

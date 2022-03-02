@@ -5,7 +5,7 @@ import br.com.alisson.stockpicking.data.db.toStockEntity
 import br.com.alisson.stockpicking.data.db.toStockList
 import br.com.alisson.stockpicking.data.model.Stock
 
-class StockDbDataSource(
+class StockRepositoryImpl(
     private val stockDao: StockDao
 ) : StockRepository {
 

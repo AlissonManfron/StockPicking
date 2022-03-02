@@ -2,7 +2,6 @@ package br.com.alisson.stockpicking.ui.resume
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import br.com.alisson.stockpicking.data.model.ResourceList
 import br.com.alisson.stockpicking.data.repository.StockRepository
@@ -29,14 +28,6 @@ class ResumeViewModel(private val stockRepository: StockRepository) : ViewModel(
                 }
                 pieEntryList.value = ResourceList(pieList)
             }
-        }
-    }
-
-    class ResumeViewModelFactory(private val stockRepository: StockRepository) :
-        ViewModelProvider.Factory {
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return ResumeViewModel(stockRepository) as T
         }
     }
 }

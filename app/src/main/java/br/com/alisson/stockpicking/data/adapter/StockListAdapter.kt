@@ -7,11 +7,16 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.alisson.stockpicking.data.model.Stock
 import br.com.alisson.stockpicking.databinding.StockItemBinding
 
-class StockListAdapter(private var stocks: List<Stock>,
-                       private val itemClickListener: (Stock) -> Unit
-) : RecyclerView.Adapter<StockListAdapter.ViewHolder>() {
+class StockListAdapter : RecyclerView.Adapter<StockListAdapter.ViewHolder>() {
+    private var stocks: List<Stock> = emptyList()
+    private lateinit var itemClickListener: (Stock) -> Unit
 
-    class ViewHolder(private val item: StockItemBinding) : RecyclerView.ViewHolder(item.root), View.OnLongClickListener {
+    fun setListener(listener: (Stock) -> Unit) {
+        itemClickListener = listener
+    }
+
+    class ViewHolder(private val item: StockItemBinding) : RecyclerView.ViewHolder(item.root),
+        View.OnLongClickListener {
 
         private var itemLongClickListener: ItemLongClickListener? = null
 
@@ -35,7 +40,8 @@ class StockListAdapter(private var stocks: List<Stock>,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemBinding = StockItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val itemBinding =
+            StockItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(itemBinding)
     }
 

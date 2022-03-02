@@ -7,29 +7,19 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import br.com.alisson.stockpicking.R
-import br.com.alisson.stockpicking.data.db.AppDatabase
-import br.com.alisson.stockpicking.data.repository.StockDbDataSource
 import br.com.alisson.stockpicking.databinding.RegisterStockFragmentBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class RegisterStockFragment : Fragment() {
 
+    private val viewModel: RegisterStockViewModel by viewModel()
     private var _binding: RegisterStockFragmentBinding? = null
     private val binding get() = _binding!!
-
-    private val viewModel: RegisterStockViewModel by activityViewModels(
-        factoryProducer = {
-            val dataBase = AppDatabase.getDatabase(requireContext())
-            RegisterStockViewModel.RegisterStockViewModelFactory(
-                stockRepository = StockDbDataSource(dataBase.stockDao())
-            )
-        }
-    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

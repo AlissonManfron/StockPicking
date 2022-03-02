@@ -6,32 +6,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.alisson.stockpicking.R
 import br.com.alisson.stockpicking.data.adapter.StockListAdapter
-import br.com.alisson.stockpicking.data.db.AppDatabase
 import br.com.alisson.stockpicking.data.model.Stock
-import br.com.alisson.stockpicking.data.repository.StockDbDataSource
 import br.com.alisson.stockpicking.databinding.FragmentPortfolioBinding
+import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class PortfolioFragment : Fragment() {
-    private lateinit var adapter: StockListAdapter
+
+    private val viewModel: PortfolioViewModel by viewModel()
+    private val adapter: StockListAdapter by inject()
     private var _binding: FragmentPortfolioBinding? = null
     private val binding get() = _binding!!
 
     private val itemOnClick: (stock: Stock) -> Unit = { stock ->
         viewModel.deleteStock(stock)
     }
-
-    private val viewModel: PortfolioViewModel by activityViewModels(
-        factoryProducer = {
-            val dataBase = AppDatabase.getDatabase(requireContext())
-            PortfolioViewModel.PortfolioViewModelFactory(
-                stockRepository = StockDbDataSource(dataBase.stockDao())
-            )
-        }
-    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -73,7 +65,7 @@ class PortfolioFragment : Fragment() {
     private fun setupRecyclerView() {
         val layoutManager = LinearLayoutManager(requireContext())
         binding.recycler.layoutManager = layoutManager
-        adapter = StockListAdapter(emptyList(), itemOnClick)
+        adapter.setListener(itemOnClick)
         binding.recycler.adapter = adapter
     }
 

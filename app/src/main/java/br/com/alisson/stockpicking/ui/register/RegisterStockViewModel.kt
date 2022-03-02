@@ -3,7 +3,6 @@ package br.com.alisson.stockpicking.ui.register
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import br.com.alisson.stockpicking.R
 import br.com.alisson.stockpicking.data.model.Resource
@@ -11,7 +10,6 @@ import br.com.alisson.stockpicking.data.model.Stock
 import br.com.alisson.stockpicking.data.repository.StockRepository
 import br.com.alisson.stockpicking.infrastructure.extensions.NumberExtensions.Companion.toWeight
 import br.com.alisson.stockpicking.infrastructure.extensions.StringExtensions.Companion.toDate
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class RegisterStockViewModel(private val repository: StockRepository) : ViewModel() {
@@ -101,13 +99,5 @@ class RegisterStockViewModel(private val repository: StockRepository) : ViewMode
         price = MutableLiveData<String>()
         date = MutableLiveData<String>()
         weight = MutableLiveData<Int>()
-    }
-
-    class RegisterStockViewModelFactory(private val stockRepository: StockRepository) :
-        ViewModelProvider.Factory {
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return RegisterStockViewModel(stockRepository) as T
-        }
     }
 }
