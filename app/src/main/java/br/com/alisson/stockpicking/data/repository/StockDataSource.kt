@@ -33,8 +33,7 @@ class StockDataSource(
     }
 
     override suspend fun deleteStock(stock: Stock) {
-        stockDao.delete(stock.toStockEntity())
-        calculateWeight()
+        stockDao.delete(stock.toStockEntity()).also { calculateWeight() }
     }
 
     override suspend fun getStocks(): List<Stock> {
