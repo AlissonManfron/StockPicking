@@ -5,9 +5,9 @@ import java.util.*
 data class Stock(
     val id: Int?,
     val ticker: String,
-    var weight: Int,
-    val quantity: Int,
-    val price: Double,
+    var weight: Int = 100,
+    var quantity: Int,
+    var price: Double,
     val date: Date
 ) {
     fun getCurrentBalance(): String {

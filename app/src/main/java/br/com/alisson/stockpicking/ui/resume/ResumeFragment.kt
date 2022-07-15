@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import br.com.alisson.stockpicking.R
 import br.com.alisson.stockpicking.data.db.AppDatabase
-import br.com.alisson.stockpicking.data.repository.StockDbDataSource
+import br.com.alisson.stockpicking.data.repository.StockDataSource
 import br.com.alisson.stockpicking.databinding.FragmentResumeBinding
 import br.com.alisson.stockpicking.infrastructure.util.Util
 import com.github.mikephil.charting.animation.Easing
@@ -29,7 +29,7 @@ class ResumeFragment : Fragment() {
         factoryProducer = {
             val dataBase = AppDatabase.getDatabase(requireContext())
             ResumeViewModel.ResumeViewModelFactory(
-                stockRepository = StockDbDataSource(dataBase.stockDao())
+                stockRepository = StockDataSource(dataBase.stockDao())
             )
         }
     )

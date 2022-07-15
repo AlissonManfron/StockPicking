@@ -12,7 +12,7 @@ import br.com.alisson.stockpicking.R
 import br.com.alisson.stockpicking.data.adapter.StockListAdapter
 import br.com.alisson.stockpicking.data.db.AppDatabase
 import br.com.alisson.stockpicking.data.model.Stock
-import br.com.alisson.stockpicking.data.repository.StockDbDataSource
+import br.com.alisson.stockpicking.data.repository.StockDataSource
 import br.com.alisson.stockpicking.databinding.FragmentPortfolioBinding
 
 class PortfolioFragment : Fragment() {
@@ -28,7 +28,7 @@ class PortfolioFragment : Fragment() {
         factoryProducer = {
             val dataBase = AppDatabase.getDatabase(requireContext())
             PortfolioViewModel.PortfolioViewModelFactory(
-                stockRepository = StockDbDataSource(dataBase.stockDao())
+                stockRepository = StockDataSource(dataBase.stockDao())
             )
         }
     )

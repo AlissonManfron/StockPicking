@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import br.com.alisson.stockpicking.R
 import br.com.alisson.stockpicking.data.db.AppDatabase
-import br.com.alisson.stockpicking.data.repository.StockDbDataSource
+import br.com.alisson.stockpicking.data.repository.StockDataSource
 import br.com.alisson.stockpicking.databinding.RegisterStockFragmentBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -26,7 +26,7 @@ class RegisterStockFragment : Fragment() {
         factoryProducer = {
             val dataBase = AppDatabase.getDatabase(requireContext())
             RegisterStockViewModel.RegisterStockViewModelFactory(
-                stockRepository = StockDbDataSource(dataBase.stockDao())
+                stockRepository = StockDataSource(dataBase.stockDao())
             )
         }
     )

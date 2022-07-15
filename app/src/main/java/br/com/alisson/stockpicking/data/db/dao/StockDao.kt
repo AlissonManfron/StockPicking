@@ -18,4 +18,7 @@ interface StockDao {
     @Delete
     suspend fun delete(stock: StockEntity)
 
+    @Query("SELECT * FROM stock WHERE ticker LIKE :ticker")
+    suspend fun getStockByTicker(ticker: String): StockEntity?
+
 }
