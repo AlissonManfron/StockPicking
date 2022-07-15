@@ -42,7 +42,7 @@ class PortfolioFragment : Fragment() {
         val view = binding.root
         setupRecyclerView()
 
-        viewModel.getStocks().observe(viewLifecycleOwner, {
+        viewModel.getStocks().observe(viewLifecycleOwner) {
             it.valuedList?.let { stocks ->
                 adapter.setStocks(stocks)
                 showListStocks(true)
@@ -50,7 +50,7 @@ class PortfolioFragment : Fragment() {
             it.emptyList?.let {
                 showListStocks(false)
             }
-        })
+        }
 
         viewModel.getAllStocks()
 
