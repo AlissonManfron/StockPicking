@@ -20,7 +20,7 @@ class StockDataSource(
         if (searchStock != null) {
             updateStock(searchStock, stock)
         } else {
-            createStock(stock)
+            stockDao.save(stock.toStockEntity())
         }
     }
 
