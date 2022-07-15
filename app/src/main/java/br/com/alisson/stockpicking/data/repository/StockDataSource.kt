@@ -20,7 +20,7 @@ class StockDataSource(
         if (searchStock != null) {
             updateStock(searchStock, stock)
         } else {
-            stockDao.save(stock.toStockEntity())
+            stockDao.save(stock.toStockEntity()).also { calculateWeight() }
         }
     }
 
